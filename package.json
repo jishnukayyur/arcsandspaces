@@ -7,7 +7,8 @@
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "serve:ssr:arcsandspaces": "node dist/arcsandspaces/server/server.mjs"
+    "serve:ssr:arcsandspaces": "node dist/arcsandspaces/server/server.mjs",
+    "deploy": "ng build --configuration production --base-href /arcsandspaces/ && npx gh-pages -d dist/arcsandspaces/browser"
   },
   "prettier": {
     "printWidth": 100,
