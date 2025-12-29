@@ -1,0 +1,85 @@
+/* Header background */
+.header {
+    background-color: #0f4f52;
+    padding: 24px 32px;
+    color: #e6f28a;
+}
+
+/* Layout container */
+.header-container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* Site title */
+.logo {
+    font-size: 32px;
+    font-weight: 600;
+    color: #e6f28a;
+}
+
+/* Navbar */
+.nav {
+    display: flex;
+    gap: 40px;
+}
+
+/* Nav links */
+.nav a {
+    text-decoration: none;
+    font-size: 18px;
+    color: #cfd8d8;
+    padding-bottom: 6px;
+    position: relative;
+}
+
+/* Active link underline */
+.nav a.active {
+    color: #e6f28a;
+}
+
+.nav a.active::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 2px;
+    background-color: #e6f28a;
+}
+
+/* Hover effect */
+.nav a:hover {
+    color: #e6f28a;
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+    .header {
+        padding: 20px;
+    }
+
+    .logo {
+        font-size: 26px;
+    }
+
+    .nav {
+        gap: 24px;
+    }
+
+    .nav a {
+        font-size: 16px;
+    }
+}
+
+@media (max-width: 480px) {
+    .header-container {
+        gap: 16px;
+    }
+
+    .nav {
+        flex-direction: column;
+        gap: 12px;
+    }
+}

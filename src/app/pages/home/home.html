@@ -1,0 +1,113 @@
+<div class="carousel">
+    <!-- Slides -->
+    <div class="slides" [style.transform]="'translateX(-' + currentIndex * 100 + '%)'">
+        <div class="slide" *ngFor="let image of images">
+
+            <img [src]="image" alt="carousel image" />
+        </div>
+    </div>
+
+    <!-- Left Arrow -->
+    <button class="nav prev" (click)="prev()">
+        &#10094;
+    </button>
+
+    <!-- Right Arrow -->
+    <button class="nav next" (click)="next()">
+        &#10095;
+    </button>
+
+    <!-- Dots -->
+    <div class="dots">
+        <span *ngFor="let image of images; let i = index" [class.active]="i === currentIndex"
+            (click)="goToSlide(i)"></span>
+    </div>
+</div>
+<div class="spacer"></div>
+
+<!-- ABOUT US SECTION -->
+<section class="about-section">
+    <div class="about-container">
+        <h2 class="about-title">About Us</h2>
+
+        <p class="about-text">
+            At Arcs&Spaces, we believe that exceptional interior design transforms
+            spaces into timeless experiences. With a passion for elegance and a
+            commitment to craftsmanship, we create environments that reflect your
+            unique vision while embracing modern aesthetics and functional beauty.
+        </p>
+    </div>
+</section>
+<div class="spacer"></div>
+
+<!-- CTA SECTION -->
+<section class="cta-section">
+    <h2 class="cta-title">Let's Create Together</h2>
+
+    <p class="cta-subtitle">
+        Ready to transform your space? We'd love to hear from you and bring your
+        vision to life.
+    </p>
+
+    <button class="cta-button" (click)="openContact()">
+        Contact Us
+    </button>
+</section>
+
+<!-- CONTACT MODAL -->
+<div class="modal-overlay" *ngIf="showContact">
+    <div class="contact-modal">
+        <button class="close-btn" (click)="closeContact()">×</button>
+
+        <h3 class="modal-title">Get in Touch</h3>
+
+        <div class="contact-card clickable" (click)="openWhatsApp()">
+            <div class="icon"><i class="fa-brands fa-whatsapp"></i></div>
+            <div>
+                <strong>+91 8281568250</strong>
+            </div>
+        </div>
+
+        <div class="contact-card clickable" (click)="openInstagram()">
+            <div class="icon"><i class="fa-brands fa-instagram"></i></div>
+            <div>
+                <strong>@arcsnspaces</strong>
+            </div>
+        </div>
+
+        <div class="contact-card clickable" (click)="callPhone()">
+            <div class="icon"><i class="fa-solid fa-phone"></i></div>
+            <div>
+                <strong>+91 8281569250</strong>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- <div class="modal-overlay" *ngIf="showContact">
+  <div class="contact-card clickable"
+     (click)="openWhatsApp()">
+  <div class="icon"><i class="fa-brands fa-whatsapp"></i></div>
+  <div>
+    <strong>+91 8281568250</strong>
+  </div>
+</div>
+
+<div class="contact-card clickable"
+     (click)="openInstagram()">
+  <div class="icon"><i class="fa-brands fa-instagram"></i></div>
+  <div>
+    <strong>@arcsandspaces</strong>
+  </div>
+</div>
+
+<div class="contact-card clickable"
+     (click)="callPhone()">
+  <div class="icon"><i class="fa-solid fa-phone"></i></div>
+  <div>
+    <strong>+91 8281569250</strong>
+  </div>
+</div>
+
+</div> -->
