@@ -10,9 +10,9 @@ import { Component } from '@angular/core';
 })
 export class Home {
   images: any[] = [
-    "/assets/images/slide1.jpg",
-    "/assets/images/slide2.jpg",
-    "/assets/images/slide3.jpg",
+    "assets/images/slide1.jpg",
+    "assets/images/slide2.jpg",
+    "assets/images/slide3.jpg",
   ];
   currentIndex = 0;
   showContact = false;
