@@ -37,6 +37,7 @@
 /* Active link underline */
 .nav a.active {
     color: #e6f28a;
+    width: 45px;
 }
 
 .nav a.active::after {

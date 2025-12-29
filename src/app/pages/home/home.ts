@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
-import { Component } from '@angular/core';
+import { Component, NgZone } from '@angular/core';
 
 @Component({
   selector: 'app-home',
@@ -17,61 +17,31 @@ export class Home {
   currentIndex = 0;
   showContact = false;
   imgurls: string='';
-  constructor( private http: HttpClient ) {}
+  private autoSlideInterval: any;
+  constructor( private http: HttpClient ,private zone: NgZone) {}
 
   ngOnInit() {
-    //this.getImages();
+     this.startAutoSlide();
+  }
+  ngOnDestroy() {
+    this.stopAutoSlide();
+  }
+  startAutoSlide() {
+    //this.stopAutoSlide();
+
+    this.zone.run(() => {
+      this.autoSlideInterval = setInterval(() => {
+        this.next();
+      }, 5000);
+    });
   }
 
- getImages() {
-  fetch('https://script.google.com/macros/s/AKfycbzHyRWLFkpY8SijJTIOZzfvHXjUB41bhhyTyy6Q5f_eoYKtgFdp2X5zpdEp5Jo-jrFanQ/exec')
-    .then(res => res.json())
-    .then(dataset => {
-      // We don't call downloadImage anymore. 
-      // We just transform the URL and push it to the array.
-      // this.images = dataset.map((img: any) => {
-      //   // Use the thumbnail endpoint - it is much more stable for web apps
-      //   return `https://drive.google.com/thumbnail?sz=w1000&id=${this.extractId(img)}`;
-      // });
-      dataset.forEach((img: any) => {
-        this.downloadImage(img);
-      })
-    });
-}
-
-// Helper to make sure we have the clean ID
-extractId(url: string): string {
-  const parts = url.split('id=');
-  return parts.length > 1 ? parts[1] : url;
-}
-
-downloadImage(url: string) {
-  // We wrap the Google URL in a proxy URL
-  const proxiedUrl = `https://api.allorigins.win/raw?url=${encodeURIComponent(url)}`;
-
-  this.http.get(proxiedUrl, { responseType: 'blob' }).subscribe({
-    next: (blob) => {
-      const imageSrc = URL.createObjectURL(blob);
-      this.images.push(imageSrc);
-    },
-    error: (err) => console.error('ORB still blocking via proxy:', err)
-  });
-}
-
-  getDriveImageUrl(url: string): string {
-  if (!url) return '';
-
-  // Extract fileId from different Google Drive URL formats
-  const match =
-    url.match(/id=([^&]+)/) ||        // uc?id=FILE_ID
-    url.match(/\/d\/([^\/]+)/);       // /file/d/FILE_ID/
-
-  const fileId = match ? match[1] : '';
-  return fileId
-    ? `https://drive.google.com/uc?export=view&id=${fileId}`
-    : '';
-}
-
+  stopAutoSlide() {
+    if (this.autoSlideInterval) {
+      clearInterval(this.autoSlideInterval);
+      this.autoSlideInterval = null;
+    }
+  }
 
   next() {
     this.currentIndex =
@@ -85,7 +55,14 @@ downloadImage(url: string) {
 
   goToSlide(index: number) {
     this.currentIndex = index;
+    this.restartAutoSlide();
   }
+
+  restartAutoSlide() {
+    this.stopAutoSlide();
+    this.startAutoSlide();
+  }
+
   openContact() {
     this.showContact = true;
   }

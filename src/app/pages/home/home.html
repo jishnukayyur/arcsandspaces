@@ -1,4 +1,8 @@
-<div class="carousel">
+<div class="carousel" 
+(mouseenter)="stopAutoSlide()"
+  (mouseleave)="startAutoSlide()"
+  (touchstart)="stopAutoSlide()"
+  (touchend)="startAutoSlide()">
     <!-- Slides -->
     <div class="slides" [style.transform]="'translateX(-' + currentIndex * 100 + '%)'">
         <div class="slide" *ngFor="let image of images">
