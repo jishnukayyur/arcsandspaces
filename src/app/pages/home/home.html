@@ -1,8 +1,9 @@
 <div class="carousel" 
 (mouseenter)="stopAutoSlide()"
   (mouseleave)="startAutoSlide()"
-  (touchstart)="stopAutoSlide()"
-  (touchend)="startAutoSlide()">
+  (touchstart)="onTouchStart($event)"
+  (touchmove)="onTouchMove($event)"
+  (touchend)="onTouchEnd()">
     <!-- Slides -->
     <div class="slides" [style.transform]="'translateX(-' + currentIndex * 100 + '%)'">
         <div class="slide" *ngFor="let image of images">
@@ -68,7 +69,7 @@
         <div class="contact-card clickable" (click)="openWhatsApp()">
             <div class="icon"><i class="fa-brands fa-whatsapp"></i></div>
             <div>
-                <strong>+91 8281568250</strong>
+                <strong>+91 8281569250</strong>
             </div>
         </div>
 

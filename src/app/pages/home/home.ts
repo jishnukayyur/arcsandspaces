@@ -16,12 +16,14 @@ export class Home {
   ];
   currentIndex = 0;
   showContact = false;
-  imgurls: string='';
+  imgurls: string = '';
   private autoSlideInterval: any;
-  constructor( private http: HttpClient ,private zone: NgZone) {}
+  touchStartX = 0;
+  touchEndX = 0;
+  constructor(private http: HttpClient, private zone: NgZone) { }
 
   ngOnInit() {
-     this.startAutoSlide();
+    this.startAutoSlide();
   }
   ngOnDestroy() {
     this.stopAutoSlide();
@@ -71,7 +73,7 @@ export class Home {
     this.showContact = false;
   }
   openWhatsApp() {
-    window.open('https://wa.me/918281568250', '_blank');
+    window.open('https://wa.me/918281569250', '_blank');
   }
 
   openInstagram() {
@@ -80,5 +82,27 @@ export class Home {
 
   callPhone() {
     window.location.href = 'tel:+918281569250';
+  }
+
+  onTouchStart(event: TouchEvent) {
+    this.touchStartX = event.touches[0].clientX;
+  }
+
+  onTouchMove(event: TouchEvent) {
+    this.touchEndX = event.touches[0].clientX;
+  }
+
+  onTouchEnd() {
+    const swipeDistance = this.touchStartX - this.touchEndX;
+
+    if (Math.abs(swipeDistance) > 50) { // minimum swipe
+      if (swipeDistance > 0) {
+        this.next(); // swipe left → next slide
+      } else {
+        this.prev(); // swipe right → prev slide
+      }
+    }
+
+    this.startAutoSlide(); // restart auto slide
   }
 }
