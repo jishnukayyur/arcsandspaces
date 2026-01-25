@@ -1,1 +1,47 @@
-<p>gallery works!</p>
+<section class="gallery-section">
+  <h2 class="gallery-title">Our Gallery</h2>
+
+  <div class="gallery-grid">
+    @for (item of galleries; track item.title) {
+    <div
+      class="gallery-card"
+      
+      (click)="openGallery(item)"
+    >
+      <img [src]="item.cover" alt="" />
+
+      <div class="overlay">
+        <!-- <div class="folder-icon">
+        <i class="fa-solid fa-folder-open"></i>
+        </div> -->
+        <lucide-icon
+            [img]="FolderIcon"
+            [size]="48"
+            color="#C6E27A">
+            </lucide-icon>
+        <div class="text">
+            <h3>{{ item.title }}</h3>
+            <p>{{ item.images.length }} images</p>
+        </div>
+      </div>
+    </div>
+    }
+  </div>
+</section>
+
+<!-- IMAGE VIEW MODAL -->
+<div class="modal-overlay" *ngIf="activeGallery">
+  <div class="image-modal">
+    <button class="close-btn" (click)="closeGallery()">×</button>
+
+    <h3>{{ activeGallery.title }}</h3>
+
+    <div class="image-grid">
+      <img
+        *ngFor="let img of activeGallery.images"
+        [src]="img"
+        alt=""
+      />
+    </div>
+  </div>
+</div>

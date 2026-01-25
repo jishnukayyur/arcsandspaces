@@ -23,7 +23,7 @@ export class Home {
   constructor(private http: HttpClient, private zone: NgZone) { }
 
   ngOnInit() {
-    this.startAutoSlide();
+    //this.startAutoSlide();
   }
   ngOnDestroy() {
     this.stopAutoSlide();
