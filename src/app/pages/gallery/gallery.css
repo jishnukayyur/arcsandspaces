@@ -1,5 +1,5 @@
 .gallery-section {
-  background: #0e5459;
+  background: #0f4f52;
   padding: 80px 20px;
 }
 
@@ -12,10 +12,8 @@
 }
 .gallery-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-  gap: 30px;
-  max-width: 1200px;
-  margin: auto;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 20px;
 }
 .gallery-card {
   position: relative;
@@ -112,13 +110,10 @@
   object-fit: cover;
 }
 .close-btn {
-  position: absolute;
-  top: 15px;
-  right: 20px;
   background: none;
   border: none;
-  font-size: 28px;
   color: #c6e27a;
+  font-size: 28px;
   cursor: pointer;
 }
 @media (max-width: 600px) {
@@ -148,4 +143,24 @@
 .text p {
   font-size: 16px;
   opacity: 0.9;
+}
+.gallery-overlay {
+  position: fixed;
+  inset: 0;
+  background: #0f4f52;
+  z-index: 1000;
+  padding: 24px;
+  overflow-y: auto;
+}
+.gallery-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: #c6e27a;
+  margin-bottom: 20px;
+}
+
+.gallery-header h2 {
+  font-size: 28px;
+  margin: 0;
 }

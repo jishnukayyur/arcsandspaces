@@ -1,36 +1,39 @@
-<section class="gallery-section">
-  <h2 class="gallery-title">Our Gallery</h2>
+@if(!activeGallery){
+    <section class="gallery-section">
+    <h2 class="gallery-title">Our Gallery</h2>
 
-  <div class="gallery-grid">
-    @for (item of galleries; track item.title) {
-    <div
-      class="gallery-card"
-      
-      (click)="openGallery(item)"
-    >
-      <img [src]="item.cover" alt="" />
+    <div class="gallery-grid">
+        @for (item of galleries; track item.title) {
+        <div
+        class="gallery-card"
+        
+        (click)="openGallery(item)"
+        >
+        <img [src]="item.cover" alt="" />
 
-      <div class="overlay">
-        <!-- <div class="folder-icon">
-        <i class="fa-solid fa-folder-open"></i>
-        </div> -->
-        <lucide-icon
-            [img]="FolderIcon"
-            [size]="48"
-            color="#C6E27A">
-            </lucide-icon>
-        <div class="text">
-            <h3>{{ item.title }}</h3>
-            <p>{{ item.images.length }} images</p>
+        <div class="overlay">
+            <!-- <div class="folder-icon">
+            <i class="fa-solid fa-folder-open"></i>
+            </div> -->
+            <lucide-icon
+                [img]="FolderIcon"
+                [size]="48"
+                color="#C6E27A">
+                </lucide-icon>
+            <div class="text">
+                <h3>{{ item.title }}</h3>
+                <p>{{ item.images.length }} images</p>
+            </div>
         </div>
-      </div>
+        </div>
+        }
     </div>
-    }
-  </div>
-</section>
+    </section>
+}
+
 
 <!-- IMAGE VIEW MODAL -->
-<div class="modal-overlay" *ngIf="activeGallery">
+<!-- <div class="modal-overlay" *ngIf="activeGallery">
   <div class="image-modal">
     <button class="close-btn" (click)="closeGallery()">×</button>
 
@@ -44,4 +47,24 @@
       />
     </div>
   </div>
-</div>
+</div> -->
+@if(activeGallery){
+    <div class="gallery-overlay" *ngIf="activeGallery">
+    <div class="gallery-header">
+        <h3>{{ activeGallery.title }}</h3>
+        <button class="close-btn" (click)="closeGallery()">✕</button>
+    </div>
+
+    <div class="gallery-grid">
+        @for (img of activeGallery.images;track img){
+            <div
+            class="gallery-card"
+            >
+                <img [src]="img" />
+            </div>
+        }
+        
+    </div>
+    </div>
+}
+
